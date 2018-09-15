@@ -3,12 +3,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
-const user = require('./routes/user.js');
-
-app.use('/user', user);
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+// Adding routes
+const notifications = require('./routes/notifications.js');
+const face_recog = require('./routes/face_recog.js');
+app.use('/notifications', notifications);
+app.use('/face_recog', face_recog);
 
 app.listen(port, () => {
     console.log("Server is running. Port: ", port);
