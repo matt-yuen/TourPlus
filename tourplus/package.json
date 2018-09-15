@@ -9,8 +9,17 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/vector-icons": "^6.3.1",
+    "base-64": "^0.1.0",
     "expo": "^30.0.1",
+    "firebase": "5.4.0",
+    "native-base": "2.7.2",
     "react": "16.3.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-navigation": "2.11.2",
+    "react-redux": "5.0.7",
+    "redux": "4.0.0",
+    "redux-thunk": "2.3.0",
+    "uuid": "3.3.2"
   }
 }
