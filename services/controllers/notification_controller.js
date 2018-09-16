@@ -56,4 +56,6 @@ exports.send_notif = (req, res) => {
             }
         }
     })();
+
+    res.send('Sending notification');
 };
