@@ -12,6 +12,8 @@ const face_recog = require('./routes/face_recog.js');
 app.use('/notifications', notifications);
 app.use('/face_recog', face_recog);
 
+app.post('/', (req, res) => res.send('Testing'));
+
 app.listen(port, () => {
     console.log("Server is running. Port: ", port);
 });
