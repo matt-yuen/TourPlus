@@ -20,6 +20,13 @@ import {
 
 import Login from './screens/Login';
 import Home from './screens/Home';
+import Camera from './screens/Camera';
+import Album from './screens/Album';
+import GuideList from './screens/GuideList';
+import TouristList from './screens/TouristList';
+import MapTrack from './screens/MapTrack';
+import SideBar from './components/SideBar';
+
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import colors from './styles/colors';
 
@@ -38,6 +45,17 @@ const MainScreen = createStackNavigator(
         headerTintColor: colors.white,
       }
     },
+    Camera: {
+      screen: Camera,
+      headerMode: 'none',
+      navigationOptions: {
+        header: null,
+      }
+    },
+    Album: Album,
+    GuideList: GuideList,
+    TouristList: TouristList,
+    MapTrack: MapTrack,
   },
   {
     initialRouteName: 'Main',
@@ -47,6 +65,9 @@ const MainScreen = createStackNavigator(
 const Drawer = createDrawerNavigator(
   {
     Main: MainScreen,
+  },
+  {
+    contentComponent: SideBar
   }
 );
 

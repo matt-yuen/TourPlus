@@ -17,6 +17,24 @@ import { imageCreate, imagesFetch, logOutUser } from '../actions';
 import colors from '../styles/colors';
 
 export default class Home extends React.Component {
+    static navigationOptions = ({ navigation }) => ({
+        header: (
+          <Header style={[{ ...Platform.select({
+            android: {
+                marginTop: StatusBar.currentHeight
+            }
+        }), backgroundColor: colors.default }]}>
+            <Left>
+              <Button transparent onPress={() => navigation.openDrawer()}>
+                <Icon name='md-menu' style={{ fontSize: 30 }} />
+              </Button>
+            </Left>
+            <Right>
+              
+            </Right>
+          </Header>
+        ),
+      });
     constructor(props) {
         super(props);
         this.state = {
@@ -38,7 +56,12 @@ export default class Home extends React.Component {
                   
                   <View style={{alignItems: 'center', marginTop: 30}}>
                     
-                        <Text>Welcome</Text>
+                        <Button iconLeft block onPress={() => this.props.navigation.navigate('GuideList')}  style={{backgroundColor: colors.default, marginTop: 20}}>
+                          <Text style={{color: '#fdfdfd'}}>Guide</Text>
+                        </Button>
+                        <Button iconLeft block onPress={() => this.props.navigation.navigate('TouristList')} style={{backgroundColor: colors.default, marginTop: 20}}>
+                          <Text style={{color: '#fdfdfd'}}>Tourist</Text>
+                        </Button>
                     
                   </View>
                 </View>
