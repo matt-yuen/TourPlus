@@ -16,20 +16,16 @@ let expo = new Expo();
 let messages = [];
 
 exports.send_notif = (req, res) => {
-    // Get user ID
-    const uid = req.body.uid;
+    const guide = req.body.guideNotifToken;
+    const tourist = req.body.touristNotifToken;
 
-    // Pull expo token from Firebase
-    var expoTokenRef = db.ref(`users/${uid}/notifToken`);
-    var expoToken = [];
+    var tokens = []; // Guide token first
 
-    expoTokenRef.on('value', (snap) => {
-        expoToken.push(snap.val());
-    }, (err) => {
-        console.log('Reading failed: ' + errorObject.code);
-    });
+    tokens.push(guide);
+    tokens.push(tourist);
 
-    for(let token of expoToken) {
+    let i = 0;
+    for(let token of tokens) {
         if(!Expo.isExpoPushToken(token)) {
             console.error(`Push token ${token} is not a valid push token`);
             return;
@@ -39,25 +35,27 @@ exports.send_notif = (req, res) => {
             to: token,
             sound: 'default',
             title: 'Alert!',
-            body: 'You are too far from your tour guide. Please stay close.'
+            body: i == 0 ? 'One of your tour members is far away from you.' : 'You are too far from your tour guide. Please stay close.'
         });
-    }
+
+        i++;
+    };
 
     let chunks = expo.chunkPushNotifications(messages);
     let tickets = [];
 
     (async () => {
         for (let chunk of chunks) {
-          try {
-            let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
-            console.log(ticketChunk);
-            tickets.push(...ticketChunk);
-          } catch (error) {
-            console.error(error);
-          }
+            try {
+                let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
+                console.log(ticketChunk);
+                tickets.push(...ticketChunk);
+            } catch (error) {
+                console.log('error');
+                console.error(error);
+            }
         }
     })();
 
-    // Debug
     res.send('Sending notification');
 };
