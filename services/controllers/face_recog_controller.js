@@ -5,8 +5,20 @@ exports.enroll = (req, res) => {
 
     processingFunctions.enroll(req.body.imgUrl, req.body.subjectId, function(result){
         console.log(result);
-        if (result) res.send("Enrollment successful");
-        else res.send("Error occured in Enrollment");
+
+        var resultObj = {
+            "Result" : "Error."
+        };
+
+        if (result) {
+            resultObj.Result = "Success";
+            res.send(resultObj);
+            return;
+        }
+        else {
+            res.send(resultObj);
+            return;
+        }
     });
 
 };
@@ -15,12 +27,19 @@ exports.recognize = (req, res) => {
 
     processingFunctions.recognize(req.body.imgUrl, CONSTANTS.galleryName, function(result){
         
+        var resultObj = {
+            "Result" : "Error. No learned face detected!",
+            "DetectedId" : ""
+        };
+        
         if(result) { 
-            res.send("Face recognized in image belongs to " + result);
+            resultObj.Result = "Success";
+            resultObj.DetectedId = result;
+            res.send(resultObj);
             return;
         }
         else {
-            res.send("Face recognized in image does not belong in gallery"); 
+            res.send(resultObj); 
             return;
         }
     });
@@ -28,10 +47,23 @@ exports.recognize = (req, res) => {
 };
 
 exports.clear = (req, res) => {
+
     processingFunctions.removeGallery(CONSTANTS.galleryName, function(result){
-        console.log(result);
-        if(result) res.send("Gallery successfully cleared");
-        else res.send("Error occured in clearing gallery");
+        
+        var resultObj = {
+            "Result" : "Error"
+        };
+
+
+        if(result) {
+            resultObj.Result = "Success";
+            res.send(resultObj);
+            return;
+        }
+        else {
+            res.send(resultObj);
+            return;
+        }
     });
 
 
