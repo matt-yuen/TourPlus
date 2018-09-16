@@ -16,27 +16,13 @@ let expo = new Expo();
 let messages = [];
 
 exports.send_notif = (req, res) => {
-    // Get tour guide and tourist ID
-    const guide = req.body.guid;
-    const tourist = req.body.tuid;
+    const guide = req.body.guideNotifToken;
+    const tourist = req.body.touristNotifToken;
 
-    // Pull expo token from Firebase
-    var guideToken = db.ref(`users/${guide}/notifToken`);
-    var touristToken = db.ref(`users/${tourist}/notifToken`);
     var tokens = []; // Guide token first
 
-    // Send notification
-    guideToken.on('value', (snap) => {
-        tokens.push(snap.val());
-    }, (err) => {
-        console.log('Reading failed: ' + errorObject.code);
-    });
-
-    touristToken.on('value', (snap) => {
-        tokens.push(snap.val());
-    }, (err) => {
-        console.log('Reading failed: ' + errorObject.code);
-    });
+    tokens.push(guide);
+    tokens.push(tourist);
 
     let i = 0;
     for(let token of tokens) {
@@ -70,7 +56,4 @@ exports.send_notif = (req, res) => {
             }
         }
     })();
-
-    // Debug
-    res.send('Sending notification');
 };
