@@ -4,7 +4,6 @@
 const request = require("request");
 const CONSTANTS = require("./Constants");
 
-
 // function list
 // 1. Enroll
 // 2. Recognize
@@ -42,7 +41,7 @@ function enroll(imgUrl, subjectId, callback){
         }
         // after post
         //  console.log("SUCCESS");
-        //  console.log(JSON.stringify(response));
+        // console.log(JSON.stringify(response));
         callback(true);
         return;
     });
@@ -76,13 +75,18 @@ function recognize(imgUrl, galleryToSearch, callback){
             callback(false);
             return;
         }
+
+        var resultArray = [];
+
+        JSON.parse(body).images.forEach(function(image){
+            resultArray.push(image.transaction.subject_id);
+        });
+
         // console.log("Success in recognize");
         if (typeof JSON.parse(body).Errors === 'undefined'){
             // go through all matches and return user Id's
-            if(JSON.parse(body).images[0].transaction.status == "success"){
-                callback(JSON.parse(body).images[0].transaction.subject_id);
-                return;
-            }
+            callback(resultArray);
+            return;            
         }
 
         callback(false);
@@ -95,7 +99,7 @@ function removeGallery(gallery, callback){
     const params = {
         "gallery_name" : gallery
     };
-    console.log("Fine till here");
+    
     const headerJson = {
         "Content-Type" : "application/json",
         "app_id" : CONSTANTS.appId,
@@ -116,8 +120,6 @@ function removeGallery(gallery, callback){
             return;
         }
 
-        // console.log("Success in remove gallery");
-        console.log(JSON.stringify(response));
         callback(true);
         return;
     });
