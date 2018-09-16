@@ -76,15 +76,16 @@ function recognize(imgUrl, galleryToSearch, callback){
             return;
         }
 
-        var resultArray = [];
-
-        JSON.parse(body).images.forEach(function(image){
-            resultArray.push(image.transaction.subject_id);
-        });
-
         // console.log("Success in recognize");
         if (typeof JSON.parse(body).Errors === 'undefined'){
             // go through all matches and return user Id's
+            
+            var resultArray = [];
+
+            JSON.parse(body).images.forEach(function(image){
+                resultArray.push(image.transaction.subject_id);
+            });
+            
             callback(resultArray);
             return;            
         }
