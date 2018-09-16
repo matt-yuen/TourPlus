@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import  { Keyboard } from 'react-native';
+import  { Keyboard, Image } from 'react-native';
 import { Container, View, Left, Right, Button, Icon, Item, Input, Text, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
@@ -37,9 +37,12 @@ class Login extends Component {
     return(
       <Container style={{backgroundColor: '#fdfdfd'}}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingLeft: 50, paddingRight: 50}}>
-          <View style={{marginBottom: 50, width: '100%'}}>
-            <Text style={{fontSize: 24, fontWeight: 'bold', textAlign: 'left', width: '100%', color: colors.default}}>Welcome, </Text>
-            <Text style={{fontSize: 18, textAlign: 'left', width: '100%', color: '#687373'}}> </Text>
+          <View style={{alignItems: 'center', marginBottom: 20, width: '100%'}}>
+            <Image
+                              style={{ width: 190, height: 190}}
+                              resizeMode='contain'
+                              source={require('../styles/logo.png')}
+                            />
           </View>
           <Item>
               <Icon active name='ios-person' style={{color: "#687373"}}  />

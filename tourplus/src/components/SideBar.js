@@ -41,7 +41,6 @@ class SideBar extends React.Component {
                         />
                         </TouchableOpacity>
                         <Title>{this.state.name}</Title>
-                        <Subtitle>Subtitle</Subtitle>
                     </Body>
                     <Right></Right>
                 </Header>
@@ -59,19 +58,7 @@ class SideBar extends React.Component {
                             <Icon active name="arrow-forward" />
                         </Right>
                     </ListItem>
-                    <ListItem icon button onPress={() => this.props.logOutUser(this.props.navigation)}>
-                        <Left>
-                            <Button style={{ backgroundColor: "red" }}>
-                                <Icon active name="ios-log-out" />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Text>LogOut</Text>
-                        </Body>
-                        <Right>
-                            <Icon active name="arrow-forward" />
-                        </Right>
-                    </ListItem>
+                    
                     <ListItem icon button onPress={() => this.props.navigation.navigate('Camera', { page: 'album' })}>
                         <Left>
                             <Button style={{ backgroundColor: "green" }}>
@@ -80,6 +67,19 @@ class SideBar extends React.Component {
                         </Left>
                         <Body>
                             <Text>Camera</Text>
+                        </Body>
+                        <Right>
+                            <Icon active name="arrow-forward" />
+                        </Right>
+                    </ListItem>
+                    <ListItem icon button onPress={() => this.props.logOutUser(this.props.navigation)}>
+                        <Left>
+                            <Button style={{ backgroundColor: "red" }}>
+                                <Icon active name="ios-log-out" />
+                            </Button>
+                        </Left>
+                        <Body>
+                            <Text>Logout</Text>
                         </Body>
                         <Right>
                             <Icon active name="arrow-forward" />

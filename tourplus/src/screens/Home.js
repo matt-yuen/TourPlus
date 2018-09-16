@@ -51,16 +51,18 @@ export default class Home extends React.Component {
     render() {
         return (
             <Container style={{backgroundColor: '#fdfdfd'}}>
-                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingLeft: 50, paddingRight: 50}}>
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingLeft: 20, paddingRight: 20}}>
 
                   
                   <View style={{alignItems: 'center', marginTop: 30}}>
+                        <Text style={{fontSize: 24, fontWeight: 'bold', textAlign: 'left', width: '100%', color: colors.default}}>Welcome, </Text>
+                        <Text style={{fontSize: 18, textAlign: 'left', width: '100%', color: '#687373'}}> to TourPlus</Text>
                     
                         <Button iconLeft block onPress={() => this.props.navigation.navigate('GuideList')}  style={{backgroundColor: colors.default, marginTop: 20}}>
-                          <Text style={{color: '#fdfdfd'}}>Guide</Text>
+                          <Text style={{color: '#fdfdfd'}}>          Guide          </Text>
                         </Button>
                         <Button iconLeft block onPress={() => this.props.navigation.navigate('TouristList')} style={{backgroundColor: colors.default, marginTop: 20}}>
-                          <Text style={{color: '#fdfdfd'}}>Tourist</Text>
+                          <Text style={{color: '#fdfdfd'}}>          Tourist          </Text>
                         </Button>
                     
                   </View>
